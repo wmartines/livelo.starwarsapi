@@ -35,11 +35,13 @@ public class PeopleController {
 	 * Find all.
 	 *
 	 * @return the response entity
+	 * @throws EntityNotFoundException 
 	 */
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById(@PathVariable String id){
+	public ResponseEntity<?> findById(@PathVariable String id) {
 		
-        return new ResponseEntity<>(convertToPresenter(peopleConsumerService.findPeopleById(id)), HttpStatus.OK);
+		return new ResponseEntity<>(convertToPresenter(peopleConsumerService.findPeopleById(id)), HttpStatus.OK);
+		
     }
 	
 	/**
