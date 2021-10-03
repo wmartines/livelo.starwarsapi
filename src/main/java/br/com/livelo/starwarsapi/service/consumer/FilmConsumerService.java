@@ -9,36 +9,41 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.livelo.starwarsapi.pojo.PeoplePojo;
+import br.com.livelo.starwarsapi.pojo.FilmPojo;
 
+/**
+ * The Class FilmConsumerService.
+ */
 @Service
-public class PeopleConsumerService {
+public class FilmConsumerService {
 	
 	/** The rest template. */
 	@Autowired
 	private RestTemplate restTemplate;
 	
 	/** The url. */
-	@Value("${integration.url.people}")
+	@Value("${integration.url.film}")
 	private String  url;
 	
+	/** The Constant URL. */
 	
 	/**
-	 * Find people by id.
+	 * Find film.
 	 *
 	 * @param id the id
-	 * @return the people pojo
+	 * @return the film pojo
 	 */
-	public PeoplePojo findPeopleById(String id) {
+	public FilmPojo findFilmById(String id) {
 		try {
-
-			// find people
+			
+			// find film
 			var uri = UriComponentsBuilder.fromUriString(url).uriVariables(Map.of("id", id)).build().toUri();
-			ResponseEntity<PeoplePojo> responseEntity = restTemplate.getForEntity(uri, PeoplePojo.class);
+			ResponseEntity<FilmPojo> responseEntity = restTemplate.getForEntity(uri, FilmPojo.class);
 
 			return responseEntity.getBody();
+			
 		} catch (Exception e) {
-			throw new RuntimeException("An error occurred while find people: " + e);
-		}
+			throw new RuntimeException("An error occurred while find film: " + e);
+		} 
 	}
 }
