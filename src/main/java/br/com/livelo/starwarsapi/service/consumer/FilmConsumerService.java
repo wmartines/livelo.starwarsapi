@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.livelo.starwarsapi.exception.BusinessException;
 import br.com.livelo.starwarsapi.pojo.FilmPojo;
 
 /**
@@ -44,8 +45,8 @@ public class FilmConsumerService {
 
 			return responseEntity.getBody();
 			
-		} catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "An error occurred while find film: " + e);
+		} catch (BusinessException e) {
+			throw new BusinessException("An error occoured while find film by id: " + id);
 		} 
 	}
 }
